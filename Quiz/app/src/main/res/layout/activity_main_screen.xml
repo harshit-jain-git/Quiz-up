@@ -11,30 +11,14 @@
     android:paddingTop="16dp"
     tools:context="com.example.quiz.MainScreen">
 
- <TextView
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-
-        android:textColorHighlight="@android:color/white"
-        android:textSize="45dp"
-        android:textAlignment="center"
-        android:id="@+id/main"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-     android:layout_alignParentRight="true"
-     android:layout_alignParentLeft="true" />
-
     <Button
-        android:layout_width="100dp"
-        android:layout_height="93dp"
         android:id="@+id/button"
-        android:background="@drawable/images"
-        android:layout_marginRight="10dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true" />
-
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:background="#FFC107"
+        android:padding="10dp"
+        android:text="@string/start"
+        android:textSize="30sp" />
 </RelativeLayout>

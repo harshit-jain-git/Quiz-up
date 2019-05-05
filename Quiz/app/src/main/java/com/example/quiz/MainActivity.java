@@ -1,11 +1,9 @@
 package com.example.quiz;
 
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.content.Intent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -34,18 +32,18 @@ public class MainActivity extends AppCompatActivity {
         quesList = db.getAllQuestions();
         currentQ = quesList.get(qid);
         final Intent intent1=new Intent(MainActivity.this,SongService.class);
-        txtQuestion = (TextView) findViewById(R.id.textView2);
-        textView = (TextView) findViewById(R.id.textView);
-        textView4 = (TextView) findViewById(R.id.textView4);
-        textView5 = (TextView) findViewById(R.id.textView5);
-        textView6 = (TextView) findViewById(R.id.textView6);
-        textView7 = (TextView) findViewById(R.id.textView7);
-        rda = (RadioButton) findViewById(R.id.radioButton);
+        txtQuestion = (TextView) findViewById(R.id.options);
+        textView = (TextView) findViewById(R.id.level);
+        textView4 = (TextView) findViewById(R.id.player_id1);
+        textView5 = (TextView) findViewById(R.id.time);
+        textView6 = (TextView) findViewById(R.id.score_2);
+        textView7 = (TextView) findViewById(R.id.player_id2);
+        rda = (RadioButton) findViewById(R.id.radioButton1);
         rdb = (RadioButton) findViewById(R.id.radioButton2);
         rdc = (RadioButton) findViewById(R.id.radioButton3);
         rdd = (RadioButton) findViewById(R.id.radioButton4);
 //        butNext = (Button) findViewById(R.id.next);
-        res = (TextView) findViewById(R.id.textView3);
+        res = (TextView) findViewById(R.id.score_1);
         setQuestionView();
         String name = "Level 1";
         textView.setText(name);
