@@ -27,15 +27,10 @@ public class MainActivity extends AppCompatActivity {
     Question currentQ;
     TextView txtQuestion;
     TextView res;
-    static TextView textView,textView4,textView5,textView6,textView7;
-    RadioButton rda, rdb, rdc, rdd;
-    Button butNext;
+    static TextView level,user_1,user_2,score_1,score_2,time;
+    TextView rda, rdb, rdc, rdd;
     private void setQuestionView()
     {
-        rda.setChecked(false);
-        rdb.setChecked(false);
-        rdc.setChecked(false);
-        rdd.setChecked(false);
         txtQuestion.setText(currentQ.getQUESTION());
         rda.setText(currentQ.getOPTA());
         rdb.setText(currentQ.getOPTB());
@@ -50,29 +45,23 @@ public class MainActivity extends AppCompatActivity {
         DatabaseCreate db = new DatabaseCreate(this);
         quesList = db.getAllQuestions();
         currentQ = quesList.get(qid);
-        //final Intent intent1=new Intent(MainActivity.this,SongService.class);
-        txtQuestion = (TextView) findViewById(R.id.textView2);
-        textView = (TextView) findViewById(R.id.textView);
-        textView4 = (TextView) findViewById(R.id.textView4);
-        textView5 = (TextView) findViewById(R.id.textView5);
-        textView6 = (TextView) findViewById(R.id.textView6);
-        textView7 = (TextView) findViewById(R.id.textView7);
-        rda = (RadioButton) findViewById(R.id.radioButton);
-        rdb = (RadioButton) findViewById(R.id.radioButton2);
-        rdc = (RadioButton) findViewById(R.id.radioButton3);
-        rdd = (RadioButton) findViewById(R.id.radioButton4);
-        final RadioGroup grp = (RadioGroup) findViewById(R.id.radioGroup);
-        final RadioButton answer = (RadioButton) findViewById(grp.getCheckedRadioButtonId());
-        res = (TextView) findViewById(R.id.textView3);
+        txtQuestion = (TextView) findViewById(R.id.question);
+        level = (TextView) findViewById(R.id.level);
+        user_1 = (TextView) findViewById(R.id.user_1);
+        time = (TextView) findViewById(R.id.time);
+        score_2 = (TextView) findViewById(R.id.score_2);
+        user_2 = (TextView) findViewById(R.id.user_2);
+        score_1 = (TextView) findViewById(R.id.score_1);
+        rda = (TextView) findViewById(R.id.option_1);
+        rdb = (TextView) findViewById(R.id.option_2);
+        rdc = (TextView) findViewById(R.id.option_3);
+        rdd = (TextView) findViewById(R.id.option_4);
+
         setQuestionView();
         String name = "Level 1";
-        textView.setText(name);
-        //startService(intent1);
-        res.setText("Your Score : "+score);
+        level.setText(name);
+        score_1.setText(String.valueOf(score));
 
-
-//        textView5.setText(String.valueOf(10));
-//        long temp=System.nanoTime();
         try {
             sleep(1000);
         } catch (InterruptedException e) {
@@ -81,23 +70,23 @@ public class MainActivity extends AppCompatActivity {
         final Thread thread=new Thread(new Runnable() {
             @Override
             public void run() {
-                runOnUiThread(new Runnable(){
-                    @Override
-                    public void run() {
-                        int counter2=10;
-                        for(int i=0;i<5;i++)
-                        {
-                            textView5.setText(String.valueOf(counter2));
-                            counter2--;
-                            System.out.println(counter2 + "is the time left");
-                            try {
-                                sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                int counter=10;
+                while(!Thread.currentThread().isInterrupted())
+                {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            time.setText(String.valueOf(10));
                         }
+                    });
+                    counter--;
+                    System.out.println(counter + "is the time left");
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                });
+                }
             }
         });
         thread.start();
@@ -143,31 +132,31 @@ public class MainActivity extends AppCompatActivity {
 //                                score++;
 ////                                res.setText("Your score : " + score);
 //                            }
-////                            if ((qid == 5) || (qid == 10)||(qid==15)||(qid==20)||(qid==25)||(qid==30)||(qid==35)) {
-//////                                Toast.makeText(MainActivity.this, "Final Score For Last Level Was: " + score, Toast.LENGTH_SHORT).show();
-////                                if(qid==5){
-////                                    textView.setText("LEVEL 2");
-////                                }else
-////                                if(qid==10){
-////                                    textView.setText("LEVEL 3");
-////                                }else
-////                                if(qid==15){
-////                                    textView.setText("LEVEL 4");
-////                                }else
-////                                if(qid==20){
-////                                    textView.setText("LEVEL 5");
-////                                }else
-////                                if(qid==25){
-////                                    textView.setText("LEVEL 6");
-////                                }else
-////                                if(qid==30){
-////                                    textView.setText("LEVEL 7");
-////                                }else
-////                                if(qid==35){
-////                                    textView.setText("LEVEL 8");
-////                                }
-////                                grp.clearCheck();
-////                            }
+//                            if ((qid == 5) || (qid == 10)||(qid==15)||(qid==20)||(qid==25)||(qid==30)||(qid==35)) {
+////                                Toast.makeText(MainActivity.this, "Final Score For Last Level Was: " + score, Toast.LENGTH_SHORT).show();
+//                                if(qid==5){
+//                                    textView.setText("LEVEL 2");
+//                                }else
+//                                if(qid==10){
+//                                    textView.setText("LEVEL 3");
+//                                }else
+//                                if(qid==15){
+//                                    textView.setText("LEVEL 4");
+//                                }else
+//                                if(qid==20){
+//                                    textView.setText("LEVEL 5");
+//                                }else
+//                                if(qid==25){
+//                                    textView.setText("LEVEL 6");
+//                                }else
+//                                if(qid==30){
+//                                    textView.setText("LEVEL 7");
+//                                }else
+//                                if(qid==35){
+//                                    textView.setText("LEVEL 8");
+//                                }
+//                                grp.clearCheck();
+//                            }
 //
 //                            if (qid < 40) {
 //                                currentQ = quesList.get(qid);

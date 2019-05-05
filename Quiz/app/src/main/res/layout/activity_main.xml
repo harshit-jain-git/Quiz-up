@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="672dp"
         android:orientation="horizontal"
+        android:layout_marginTop="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +28,7 @@
             android:padding="5dp"
             android:text="10"
             android:textColor="#FFEB3B"
-            android:textSize="36sp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/time"
@@ -38,7 +39,7 @@
             android:padding="5dp"
             android:text="8"
             android:textColor="#FF5722"
-            android:textSize="36sp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/score_2"
@@ -49,7 +50,7 @@
             android:padding="5dp"
             android:text="10"
             android:textColor="#009688"
-            android:textSize="36sp" />
+            android:textSize="30sp" />
 
     </LinearLayout>
 
@@ -92,7 +93,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/users">
@@ -110,7 +111,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="200dp"
             app:srcCompat="@drawable/img" />
 
         <TextView
@@ -127,6 +128,7 @@
             android:id="@+id/options"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:orientation="vertical">
 
             <TextView
@@ -134,7 +136,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="25dp"
-                android:layout_marginTop="10dp"
+                android:paddingStart="25dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/textview_border"
+                android:clickable="true"
+                android:onClick="click_handler"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:text="a) Nothing" />
@@ -144,7 +151,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="25dp"
-                android:layout_marginTop="10dp"
+                android:paddingStart="25dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/textview_border"
+                android:clickable="true"
+                android:onClick="click_handler"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:text="b) Nothing" />
@@ -153,8 +165,13 @@
                 android:id="@+id/option_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/textview_border"
                 android:paddingLeft="25dp"
-                android:layout_marginTop="10dp"
+                android:paddingStart="25dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:clickable="true"
+                android:onClick="click_handler"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:text="c) Nothing" />
@@ -164,7 +181,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="25dp"
-                android:layout_marginTop="10dp"
+                android:paddingStart="25dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/textview_border"
+                android:clickable="true"
+                android:onClick="click_handler"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:text="d) Nothing" />
