@@ -18,7 +18,6 @@ import com.github.nkzawa.socketio.client.Socket;
 public class MainScreen extends AppCompatActivity {
     Button one;
 
-    private Socket socket;
     public static String text;
 
     @Override
@@ -30,22 +29,17 @@ public class MainScreen extends AppCompatActivity {
 
         int score = getIntent().getIntExtra("score", 0);
         try {
-            socket = IO.socket("http://10.42.0.1:3000");
-            socket.connect();
             one.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                 text = ((EditText)findViewById(R.id.editText)).getText().toString();
-                socket.emit("join", text);
-                Intent intent = new Intent(MainScreen.this, loading.class);
+                Intent intent = new Intent(MainScreen.this, mode.class);
                 startActivity(intent);
                 }
             });
-            if(score==0){
-                Toast.makeText(MainScreen.this, "Let's Start!!", Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(MainScreen.this, "Congrats! You have scored: " + score, Toast.LENGTH_SHORT).show();
-            }
+
+            Toast.makeText(MainScreen.this, "Let's Start!!", Toast.LENGTH_SHORT).show();
+
         }catch (Exception e){
             Toast.makeText(MainScreen.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
         }

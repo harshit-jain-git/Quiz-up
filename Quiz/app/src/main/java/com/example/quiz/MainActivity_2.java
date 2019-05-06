@@ -16,10 +16,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.nkzawa.socketio.client.IO;
-import com.github.nkzawa.socketio.client.Socket;
-import com.github.nkzawa.emitter.Emitter;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
@@ -31,7 +27,7 @@ import java.util.TimerTask;
 
 import static java.lang.Thread.sleep;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity_2 extends AppCompatActivity {
     List<Question> quesList;
     static int score=0;
     int counter=10;
@@ -43,11 +39,7 @@ public class MainActivity extends AppCompatActivity {
     TextView txtQuestion;
     static TextView level,user_1,user_2,score_1,score_2,time;
     TextView rda, rdb, rdc, rdd;
-    String p1, p2;
-
-    JSONObject data;
-
-    private Socket socket;
+    String p1;
 
     private void setQuestionView()
     {
@@ -78,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         p1 = MainScreen.text;
-        p2=loading.p2;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DatabaseCreate db = new DatabaseCreate(this);
@@ -88,23 +79,13 @@ public class MainActivity extends AppCompatActivity {
         level = (TextView) findViewById(R.id.level);
         user_1 = (TextView) findViewById(R.id.user_1);
         time = (TextView) findViewById(R.id.time);
-        score_2 = (TextView) findViewById(R.id.score_2);
-        user_2 = (TextView) findViewById(R.id.user_2);
         score_1 = (TextView) findViewById(R.id.score_1);
         rda = (TextView) findViewById(R.id.option_1);
         rdb = (TextView) findViewById(R.id.option_2);
         rdc = (TextView) findViewById(R.id.option_3);
         rdd = (TextView) findViewById(R.id.option_4);
 
-        try {
-            socket = IO.socket("http://10.42.0.1:3000");
-            socket.connect();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
         user_1.setText(p1);
-        user_2.setText(p2);
         setQuestionView();
         String name = "Level 1";
         level.setText(name);
@@ -123,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                     if (!clicked) counter--;
-                    if (counter == 0) socket.emit("updateResult", score, p1);
+                    if (counter == 0) nextQuestion=true;
                     System.out.println(counter + "is the time left");
                     try {
                         sleep(1000);
@@ -136,40 +117,6 @@ public class MainActivity extends AppCompatActivity {
         thread_1.start();
 
         thread_3.start();
-
-        socket.on("update", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                nextQuestion=true;
-                data = (JSONObject)args[0];
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            score_2.setText(String.valueOf(data.get(p2)));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-
-            }
-        });
-
-        socket.on("userdisconnect", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(MainActivity.this, "The other user has left the game", Toast.LENGTH_SHORT).show();
-                        Intent i1 = new Intent(MainActivity.this, MainScreen.class);
-                        startActivity(i1);
-                    }
-                });
-            }
-        });
     }
 
     Thread thread_3 = new Thread(new Runnable() {
@@ -184,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                         if (qid < 40) {
                             setQuestionView();
                         } else {
-                            Intent i1 = new Intent(MainActivity.this, exit.class);
+                            Intent i1 = new Intent(MainActivity_2.this, exit.class);
                             startActivity(i1);
                         }
                         nextQuestion = false;
@@ -207,18 +154,11 @@ public class MainActivity extends AppCompatActivity {
                     score_1.setText(String.valueOf(Integer.valueOf(score_1.getText().toString()) + 1));
                     score = score + 1;
                 } else selected_option.setBackgroundResource(R.drawable.redtextview);
-                socket.emit("updateResult", score, p1);
-//                nextQuestion=true;
+                nextQuestion=true;
                 clicked=true;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        socket.disconnect();
     }
 }
