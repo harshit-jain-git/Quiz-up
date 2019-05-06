@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.net.Socket;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     TextView txtQuestion;
     static TextView level,user_1,user_2,score_1,score_2,time;
     TextView rda, rdb, rdc, rdd;
+
+    private Socket socket;
+
     private void setQuestionView()
     {
         runOnUiThread(new Runnable() {
@@ -111,20 +115,7 @@ public class MainActivity extends AppCompatActivity {
         });
         thread_1.start();
 
-//        final Thread thread_2=new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                while(true)
-//                    if(counter == 5){
-//                        stop=true;
-//                        break;
-//                    }
-//            }
-//        });
-//        thread_2.start();
-
         thread_3.start();
-
     }
 
     Thread thread_3 = new Thread(new Runnable() {
@@ -153,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void click_handler(View v) {
         try {
-            System.out.println("Inside update method");
             if (!clicked)
             {
                 TextView selected_option = (TextView) v;
@@ -164,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
                 nextQuestion=true;
                 clicked=true;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
