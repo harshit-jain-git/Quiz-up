@@ -19,6 +19,7 @@ public class MainScreen extends AppCompatActivity {
     Button one;
 
     private Socket socket;
+    public static String text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class MainScreen extends AppCompatActivity {
             one.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                String text = ((EditText)findViewById(R.id.editText)).getText().toString();
+                text = ((EditText)findViewById(R.id.editText)).getText().toString();
                 socket.emit("join", text);
                 Intent intent = new Intent(MainScreen.this, loading.class);
                 startActivity(intent);
