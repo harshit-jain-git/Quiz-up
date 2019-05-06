@@ -92,8 +92,8 @@
         android:id="@+id/Info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginTop="20dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/users">
@@ -111,85 +111,85 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             app:srcCompat="@drawable/img" />
 
         <TextView
             android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textColor="#FFFFFF"
             android:padding="5dp"
-            android:text="What is the difference between soul and mind according to the theory by Charles Darwin?" />
+            android:text="What is the difference between soul and mind according to the theory by Charles Darwin?"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
 
         <LinearLayout
             android:id="@+id/options"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/option_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="25dp"
-                android:paddingStart="25dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:background="@drawable/textview_border"
                 android:clickable="true"
                 android:onClick="click_handler"
+                android:paddingStart="25dp"
+                android:paddingLeft="25dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="a) Nothing"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:text="a) Nothing" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/option_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="25dp"
-                android:paddingStart="25dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:background="@drawable/textview_border"
                 android:clickable="true"
                 android:onClick="click_handler"
+                android:paddingStart="25dp"
+                android:paddingLeft="25dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="b) Nothing"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:text="b) Nothing" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/option_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/textview_border"
-                android:paddingLeft="25dp"
-                android:paddingStart="25dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:clickable="true"
                 android:onClick="click_handler"
+                android:paddingStart="25dp"
+                android:paddingLeft="25dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="c) Nothing"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:text="c) Nothing" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/option_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="25dp"
-                android:paddingStart="25dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:background="@drawable/textview_border"
                 android:clickable="true"
                 android:onClick="click_handler"
+                android:paddingStart="25dp"
+                android:paddingLeft="25dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="d) Nothing"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:text="d) Nothing" />
+                android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
 

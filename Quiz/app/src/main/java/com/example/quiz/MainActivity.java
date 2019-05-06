@@ -1,5 +1,6 @@
 package com.example.quiz;
 
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,6 +15,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,20 +27,40 @@ import static java.lang.Thread.sleep;
 public class MainActivity extends AppCompatActivity {
     List<Question> quesList;
     static int score=0;
+    int counter=10;
+    boolean stop=false;
+    boolean nextQuestion=false;
+    boolean clicked=false;
     int qid=0;
     Question currentQ;
     TextView txtQuestion;
-    TextView res;
     static TextView level,user_1,user_2,score_1,score_2,time;
     TextView rda, rdb, rdc, rdd;
     private void setQuestionView()
     {
-        txtQuestion.setText(currentQ.getQUESTION());
-        rda.setText(currentQ.getOPTA());
-        rdb.setText(currentQ.getOPTB());
-        rdc.setText(currentQ.getOPTC());
-        rdd.setText(currentQ.getOPTD());
-        qid++;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (qid % 5 == 0)
+                {
+                    int l = qid/5 + 1;
+                    level.setText("Level " + l);
+                }
+                currentQ = quesList.get(qid);
+                rda.setBackgroundResource(R.drawable.textview_border);
+                rdb.setBackgroundResource(R.drawable.textview_border);
+                rdc.setBackgroundResource(R.drawable.textview_border);
+                rdd.setBackgroundResource(R.drawable.textview_border);
+                txtQuestion.setText(currentQ.getQUESTION());
+                rda.setText(currentQ.getOPTA());
+                rdb.setText(currentQ.getOPTB());
+                rdc.setText(currentQ.getOPTC());
+                rdd.setText(currentQ.getOPTD());
+                qid++;
+                clicked=false;
+                counter=10;
+            }
+        });
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,24 +86,20 @@ public class MainActivity extends AppCompatActivity {
         level.setText(name);
         score_1.setText(String.valueOf(score));
 
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        final Thread thread=new Thread(new Runnable() {
+        final Thread thread_1=new Thread(new Runnable() {
             @Override
             public void run() {
-                int counter=10;
-                while(!Thread.currentThread().isInterrupted())
+                counter=10;
+                while(!Thread.currentThread().isInterrupted()&&!stop)
                 {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            time.setText(String.valueOf(10));
+                            time.setText(String.valueOf(counter));
                         }
                     });
-                    counter--;
+                    if (!clicked) counter--;
+                    if (counter == 0) setQuestionView();
                     System.out.println(counter + "is the time left");
                     try {
                         sleep(1000);
@@ -89,111 +109,64 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        thread.start();
+        thread_1.start();
 
-
-//        final Handler mHandler = new Handler(Looper.getMainLooper()) {
-//            @Override
-//            public void handleMessage(Message message) {
-//                Bundle bundle = message.getData();
-//                String string = bundle.getString("1");
-//                String string2 = bundle.getString("2");
-//                textView5.setText(string2);
-//                Toast.makeText(MainActivity.this, string, Toast.LENGTH_SHORT).show();
-//                System.out.println("hi   "+string2);
-//            }
-//        };
-//        Thread thread = new Thread() {
-//            long startTime = System.nanoTime();
-//            long temp = System.nanoTime();
-//            int counter=10;
+//        final Thread thread_2=new Thread(new Runnable() {
 //            @Override
 //            public void run() {
 //                while(true)
-//                {
-//                    if(System.nanoTime()-temp>(int)Math.pow(10,9))
-//                    {
-////                        System.out.println(counter);
-//                        temp=System.nanoTime();
-//                        counter--;
-//                        Message msg = mHandler.obtainMessage();
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("1","Your score : " + score);
-//                        bundle.putString("2",String.valueOf(counter));
-//                        msg.setData(bundle);
-//                        mHandler.sendMessage(msg);
+//                    if(counter == 5){
+//                        stop=true;
+//                        break;
 //                    }
-//                    if(rda.isChecked()||rdb.isChecked()||rdc.isChecked()||rdd.isChecked()||System.nanoTime()-startTime>5
-//                            *(int)Math.pow(10,9))
-//                    {
-////                        Toast.makeText(MainActivity.this, "Your Score : "+score, Toast.LENGTH_SHORT).show();
-//                        try {
-//                            if (currentQ.getANSWER().equals(answer.getText())) {
-//                                score++;
-////                                res.setText("Your score : " + score);
-//                            }
-//                            if ((qid == 5) || (qid == 10)||(qid==15)||(qid==20)||(qid==25)||(qid==30)||(qid==35)) {
-////                                Toast.makeText(MainActivity.this, "Final Score For Last Level Was: " + score, Toast.LENGTH_SHORT).show();
-//                                if(qid==5){
-//                                    textView.setText("LEVEL 2");
-//                                }else
-//                                if(qid==10){
-//                                    textView.setText("LEVEL 3");
-//                                }else
-//                                if(qid==15){
-//                                    textView.setText("LEVEL 4");
-//                                }else
-//                                if(qid==20){
-//                                    textView.setText("LEVEL 5");
-//                                }else
-//                                if(qid==25){
-//                                    textView.setText("LEVEL 6");
-//                                }else
-//                                if(qid==30){
-//                                    textView.setText("LEVEL 7");
-//                                }else
-//                                if(qid==35){
-//                                    textView.setText("LEVEL 8");
-//                                }
-//                                grp.clearCheck();
-//                            }
-//
-//                            if (qid < 40) {
-//                                currentQ = quesList.get(qid);
-//                                setQuestionView();
-//                            }
-//                            else{
-//                                Bundle b=new Bundle();
-//                                b.putInt("score", score);
-//                                Intent i1=new Intent(MainActivity.this, MainScreen.class);
-//                                i1.putExtras(b);
-//                                //stopService(intent1);
-//                                finish();
-//                                score=0;
-//                                startActivity(i1);
-//                            }
-//                        } catch (Exception e) {
-////                    Toast.makeText(MainActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//                        if(qid==40){
-//                            qid=0;
-//                            break;
-//                        }
-//                        temp=System.nanoTime();
-//                        startTime=System.nanoTime();
-//                        counter=10;
-//                        Message msg = mHandler.obtainMessage();
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("1","Your score : " + score);
-//                        bundle.putString("2",String.valueOf(counter));
-//                        msg.setData(bundle);
-//                        mHandler.sendMessage(msg);
-//                    }
-//                }
 //            }
-//        };
-//        thread.start();
+//        });
+//        thread_2.start();
+
+        thread_3.start();
+
     }
 
+    Thread thread_3 = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            try{
+                while(true) {
+                    while (nextQuestion) {
+                        sleep(1000);
+                        System.out.println("Inside next question, qid: " + qid);
 
+                        if (qid < 40) {
+                            setQuestionView();
+                        } else {
+                            Intent i1 = new Intent(MainActivity.this, exit.class);
+                            startActivity(i1);
+                        }
+                        nextQuestion = false;
+                    }
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    });
+
+    public void click_handler(View v) {
+        try {
+            System.out.println("Inside update method");
+            if (!clicked)
+            {
+                TextView selected_option = (TextView) v;
+                if (currentQ.getANSWER().equals(selected_option.getText())) {
+                    selected_option.setBackgroundResource(R.drawable.greentextview);
+                    score_1.setText(String.valueOf(Integer.valueOf(score_1.getText().toString()) + 1));
+                } else selected_option.setBackgroundResource(R.drawable.redtextview);
+                nextQuestion=true;
+                clicked=true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
