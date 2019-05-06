@@ -10,10 +10,6 @@ import android.widget.Toast;
 
 import com.example.quiz.MainActivity;
 import com.example.quiz.R;
-import com.github.nkzawa.socketio.client.IO;
-import com.github.nkzawa.emitter.Emitter;
-import com.github.nkzawa.socketio.client.Socket;
-
 
 public class MainScreen extends AppCompatActivity {
     Button one;

@@ -124,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
                     });
                     if (!clicked) counter--;
                     if (counter == 0) socket.emit("updateResult", score, p1);
-                    System.out.println(counter + "is the time left");
                     try {
                         sleep(1000);
                     } catch (InterruptedException e) {
@@ -184,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
                         if (qid < 40) {
                             setQuestionView();
                         } else {
+                            exit.result = score;
                             Intent i1 = new Intent(MainActivity.this, exit.class);
                             startActivity(i1);
                         }
@@ -204,11 +204,10 @@ public class MainActivity extends AppCompatActivity {
                 score = Integer.valueOf(score_1.getText().toString());
                 if (currentQ.getANSWER().equals(selected_option.getText())) {
                     selected_option.setBackgroundResource(R.drawable.greentextview);
-                    score_1.setText(String.valueOf(Integer.valueOf(score_1.getText().toString()) + 1));
                     score = score + 1;
+                    score_1.setText(String.valueOf(score));
                 } else selected_option.setBackgroundResource(R.drawable.redtextview);
                 socket.emit("updateResult", score, p1);
-//                nextQuestion=true;
                 clicked=true;
             }
         } catch (Exception e) {
@@ -218,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        exit.result = score;
         super.onDestroy();
         socket.disconnect();
     }

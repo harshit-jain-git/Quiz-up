@@ -17,34 +17,36 @@ public class mode extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        try {
-            Button singleplayer = findViewById(R.id.singleplayer);
-            Button multiplayer = findViewById(R.id.multiplayer);
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_mode);
-            socket = IO.socket("http://10.42.0.1:3000");
-            socket.connect();
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_mode);
+        Button singleplayer = findViewById(R.id.singleplayer);
+        Button multiplayer = findViewById(R.id.multiplayer);
 
-            singleplayer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        singleplayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Good morning");
                 Intent intent = new Intent(mode.this, MainActivity_2.class);
                 startActivity(intent);
-                }
-            });
+            }
+        });
 
-            multiplayer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                String text = MainScreen.text;
-                socket.emit("join", text);
-                Intent intent = new Intent(mode.this, loading.class);
-                startActivity(intent);
+        multiplayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    socket = IO.socket("http://10.42.0.1:3000");
+                    socket.connect();
+                    String text = MainScreen.text;
+                    socket.emit("join", text);
+                    Intent intent = new Intent(mode.this, loading.class);
+                    startActivity(intent);
+                } catch (Exception e){
+                    e.printStackTrace();
                 }
-            });
+            }
+        });
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
+
 }

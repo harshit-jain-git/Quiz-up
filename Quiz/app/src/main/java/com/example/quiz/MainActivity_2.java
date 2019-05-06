@@ -71,7 +71,7 @@ public class MainActivity_2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         p1 = MainScreen.text;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_2);
         DatabaseCreate db = new DatabaseCreate(this);
         quesList = db.getAllQuestions();
         currentQ = quesList.get(qid);
@@ -105,7 +105,6 @@ public class MainActivity_2 extends AppCompatActivity {
                     });
                     if (!clicked) counter--;
                     if (counter == 0) nextQuestion=true;
-                    System.out.println(counter + "is the time left");
                     try {
                         sleep(1000);
                     } catch (InterruptedException e) {
@@ -131,6 +130,7 @@ public class MainActivity_2 extends AppCompatActivity {
                         if (qid < 40) {
                             setQuestionView();
                         } else {
+                            exit.result = score;
                             Intent i1 = new Intent(MainActivity_2.this, exit.class);
                             startActivity(i1);
                         }
@@ -151,8 +151,8 @@ public class MainActivity_2 extends AppCompatActivity {
                 score = Integer.valueOf(score_1.getText().toString());
                 if (currentQ.getANSWER().equals(selected_option.getText())) {
                     selected_option.setBackgroundResource(R.drawable.greentextview);
-                    score_1.setText(String.valueOf(Integer.valueOf(score_1.getText().toString()) + 1));
                     score = score + 1;
+                    score_1.setText(String.valueOf(score));
                 } else selected_option.setBackgroundResource(R.drawable.redtextview);
                 nextQuestion=true;
                 clicked=true;
@@ -161,4 +161,5 @@ public class MainActivity_2 extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 }
