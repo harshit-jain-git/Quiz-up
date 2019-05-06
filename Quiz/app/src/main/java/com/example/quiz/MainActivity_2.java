@@ -104,7 +104,7 @@ public class MainActivity_2 extends AppCompatActivity {
                         }
                     });
                     if (!clicked) counter--;
-                    if (counter == 0) nextQuestion=true;
+                    if (counter == 1) nextQuestion=true;
                     try {
                         sleep(1000);
                     } catch (InterruptedException e) {

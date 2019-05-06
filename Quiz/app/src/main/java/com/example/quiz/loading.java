@@ -18,6 +18,7 @@ public class loading extends AppCompatActivity {
 
     private Socket socket;
     public static String p1, p2;
+    public static int serverindex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class loading extends AppCompatActivity {
             socket.on("confirmation", new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
+                    System.out.println("I am inside confirmation");
                     JSONObject data = (JSONObject) args[0];
                     Iterator<String> itr=data.keys();
                     while(itr.hasNext())
@@ -43,6 +45,7 @@ public class loading extends AppCompatActivity {
                             p2=s1;
                         }
                     }
+                    serverindex = (int)args[1];
                     Intent i1 = new Intent(loading.this, MainActivity.class);
                     startActivity(i1);
                 }

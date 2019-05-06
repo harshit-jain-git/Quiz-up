@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     String p1, p2;
 
     JSONObject data;
+    int index;
 
     private Socket socket;
 
@@ -78,7 +79,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         p1 = MainScreen.text;
-        p2=loading.p2;
+        p2 = loading.p2;
+        index = loading.serverindex;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DatabaseCreate db = new DatabaseCreate(this);
@@ -123,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                     if (!clicked) counter--;
-                    if (counter == 0) socket.emit("updateResult", score, p1);
+                    if (counter == 1) socket.emit("updateResult", score, p1, index);
                     try {
                         sleep(1000);
                     } catch (InterruptedException e) {
@@ -207,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                     score = score + 1;
                     score_1.setText(String.valueOf(score));
                 } else selected_option.setBackgroundResource(R.drawable.redtextview);
-                socket.emit("updateResult", score, p1);
+                socket.emit("updateResult", score, p1, index);
                 clicked=true;
             }
         } catch (Exception e) {
@@ -219,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         exit.result = score;
         super.onDestroy();
+        socket.emit("beforedisconnect", index);
         socket.disconnect();
     }
 }
