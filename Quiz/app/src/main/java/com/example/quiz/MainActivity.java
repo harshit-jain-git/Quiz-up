@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                             setQuestionView();
                         } else {
                             exitmulti.result = score;
-                            exitmulti.score_p2=Integer.valueOf(score_2.getText().toString());
+                            exitmulti.score_2=Integer.valueOf(score_2.getText().toString());
                             stopService(intent1);
                             Intent i1 = new Intent(MainActivity.this, exitmulti.class);
                             startActivity(i1);
@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         exitmulti.result = score;
-        exitmulti.score_p2=Integer.valueOf(score_2.getText().toString());
+        exitmulti.score_2=Integer.valueOf(score_2.getText().toString());
         super.onDestroy();
         stopService(intent1);
         socket.emit("beforedisconnect", index);
