@@ -32,7 +32,7 @@ var express = require('express'), // Get the express module
         if(Object.keys(users[count]).length==2)
         {
           updates[count]=0;
-          setTimeout(sendmsg,2000);
+          setTimeout(sendmsg,10);
         }
       });
       function sendmsg(){
@@ -76,6 +76,7 @@ var express = require('express'), // Get the express module
       			if(id2.localeCompare(socket_ids[key][usr])==0)
       			{
       				flag=true;
+              console.log(usr + ": has left the game")
       				socket.broadcast.to(Object.values(socket_ids[key])[0]).emit('userdisconnect', users[key]);
         			socket.broadcast.to(Object.values(socket_ids[key])[1]).emit('userdisconnect', users[key]);
       				break;
