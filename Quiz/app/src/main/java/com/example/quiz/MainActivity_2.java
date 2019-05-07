@@ -129,7 +129,7 @@ public class MainActivity_2 extends AppCompatActivity {
                         sleep(1000);
                         System.out.println("Inside next question, qid: " + qid);
 
-                        if (qid < 40) {
+                        if (qid < 20) {
                             setQuestionView();
                         } else {
                             exit.result = score;
@@ -154,7 +154,7 @@ public class MainActivity_2 extends AppCompatActivity {
                 score = Integer.valueOf(score_1.getText().toString());
                 if (currentQ.getANSWER().equals(selected_option.getText())) {
                     selected_option.setBackgroundResource(R.drawable.greentextview);
-                    score = score + 1;
+                    score = score + 10 + counter;
                     score_1.setText(String.valueOf(score));
                 } else selected_option.setBackgroundResource(R.drawable.redtextview);
                 nextQuestion=true;
