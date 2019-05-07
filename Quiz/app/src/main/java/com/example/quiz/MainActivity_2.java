@@ -40,6 +40,7 @@ public class MainActivity_2 extends AppCompatActivity {
     static TextView level,user_1,user_2,score_1,score_2,time;
     TextView rda, rdb, rdc, rdd;
     String p1;
+    Intent intent1;
 
     private void setQuestionView()
     {
@@ -84,7 +85,8 @@ public class MainActivity_2 extends AppCompatActivity {
         rdb = (TextView) findViewById(R.id.option_2);
         rdc = (TextView) findViewById(R.id.option_3);
         rdd = (TextView) findViewById(R.id.option_4);
-
+        intent1=new Intent(MainActivity_2.this,SongService.class);
+        startService(intent1);
         user_1.setText(p1);
         setQuestionView();
         String name = "Level 1";
@@ -131,6 +133,7 @@ public class MainActivity_2 extends AppCompatActivity {
                             setQuestionView();
                         } else {
                             exit.result = score;
+                            stopService(intent1);
                             Intent i1 = new Intent(MainActivity_2.this, exit.class);
                             startActivity(i1);
                         }
@@ -161,5 +164,10 @@ public class MainActivity_2 extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
+    @Override
+    protected void onDestroy() {
+        exit.result = score;
+        super.onDestroy();
+        stopService(intent1);
+    }
 }

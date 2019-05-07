@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     static TextView level,user_1,user_2,score_1,score_2,time;
     TextView rda, rdb, rdc, rdd;
     String p1, p2;
-
+    Intent intent1;
     JSONObject data;
     int index;
 
@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DatabaseCreate db = new DatabaseCreate(this);
+        intent1=new Intent(MainActivity.this,SongService.class);
         quesList = db.getAllQuestions();
         currentQ = quesList.get(qid);
         txtQuestion = (TextView) findViewById(R.id.question);
@@ -97,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         rdb = (TextView) findViewById(R.id.option_2);
         rdc = (TextView) findViewById(R.id.option_3);
         rdd = (TextView) findViewById(R.id.option_4);
-
         try {
             socket = IO.socket("http://10.42.0.1:3000");
             socket.connect();
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         String name = "Level 1";
         level.setText(name);
         score_1.setText(String.valueOf(score));
-
+        startService(intent1);
         final Thread thread_1=new Thread(new Runnable() {
             @Override
             public void run() {
@@ -186,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
                             setQuestionView();
                         } else {
                             exit.result = score;
+                            stopService(intent1);
                             Intent i1 = new Intent(MainActivity.this, exit.class);
                             startActivity(i1);
                         }
@@ -221,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         exit.result = score;
         super.onDestroy();
+        stopService(intent1);
         socket.emit("beforedisconnect", index);
         socket.disconnect();
     }
