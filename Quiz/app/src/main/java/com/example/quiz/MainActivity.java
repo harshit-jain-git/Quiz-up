@@ -34,6 +34,7 @@ import static java.lang.Thread.sleep;
 public class MainActivity extends AppCompatActivity {
     List<Question> quesList;
     static int score=0;
+    static int score_p2=0;
     int counter=10;
     boolean stop=false;
     boolean nextQuestion=false;
@@ -185,9 +186,10 @@ public class MainActivity extends AppCompatActivity {
                         if (qid < 40) {
                             setQuestionView();
                         } else {
-                            exit.result = score;
+                            exitmulti.result = score;
+                            exitmulti.score_p2=Integer.valueOf(score_2.getText().toString());
                             stopService(intent1);
-                            Intent i1 = new Intent(MainActivity.this, exit.class);
+                            Intent i1 = new Intent(MainActivity.this, exitmulti.class);
                             startActivity(i1);
                         }
                         nextQuestion = false;
@@ -220,7 +222,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        exit.result = score;
+        exitmulti.result = score;
+        exitmulti.score_p2=Integer.valueOf(score_2.getText().toString());
         super.onDestroy();
         stopService(intent1);
         socket.emit("beforedisconnect", index);

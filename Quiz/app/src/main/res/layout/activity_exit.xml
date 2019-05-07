@@ -9,7 +9,7 @@
     tools:context=".exit">
 
     <TextView
-        android:id="@+id/final_score"
+        android:id="@+id/my_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/textview_border"

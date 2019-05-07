@@ -18,14 +18,14 @@
         android:layout_marginEnd="70dp"
         android:layout_marginRight="70dp"
         android:layout_marginBottom="31dp"
-        app:layout_constraintBottom_toTopOf="@+id/final_score"
+        app:layout_constraintBottom_toTopOf="@+id/my_score"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/start_image" />
 
     <TextView
-        android:id="@+id/final_score"
+        android:id="@+id/my_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -49,8 +49,8 @@
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="@+id/final_score"
-        app:layout_constraintTop_toBottomOf="@+id/final_score" />
+        app:layout_constraintEnd_toEndOf="@+id/my_score"
+        app:layout_constraintTop_toBottomOf="@+id/my_score" />
 
     <Button
         android:id="@+id/button"
