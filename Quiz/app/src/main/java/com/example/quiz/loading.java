@@ -30,6 +30,7 @@ public class loading extends AppCompatActivity {
             socket = IO.socket("http://10.42.0.1:3000");
             socket.connect();
 
+            socket.emit("join", p1);
             socket.on("confirmation", new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {

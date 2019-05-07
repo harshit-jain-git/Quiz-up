@@ -34,16 +34,8 @@ public class mode extends AppCompatActivity {
         multiplayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    socket = IO.socket("http://10.42.0.1:3000");
-                    socket.connect();
-                    String text = MainScreen.text;
-                    socket.emit("join", text);
-                    Intent intent = new Intent(mode.this, loading.class);
-                    startActivity(intent);
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
+                Intent intent = new Intent(mode.this, loading.class);
+                startActivity(intent);
             }
         });
 

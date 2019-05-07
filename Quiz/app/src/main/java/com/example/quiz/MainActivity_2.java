@@ -38,7 +38,7 @@ public class MainActivity_2 extends AppCompatActivity {
     Question currentQ;
     TextView txtQuestion;
     static TextView level,user_1,user_2,score_1,score_2,time;
-    TextView rda, rdb, rdc, rdd;
+    TextView rda, rdb, rdc, rdd, correctanswer;
     String p1;
     Intent intent1;
 
@@ -156,7 +156,18 @@ public class MainActivity_2 extends AppCompatActivity {
                     selected_option.setBackgroundResource(R.drawable.greentextview);
                     score = score + 10 + counter;
                     score_1.setText(String.valueOf(score));
-                } else selected_option.setBackgroundResource(R.drawable.redtextview);
+                } else
+                {
+                    selected_option.setBackgroundResource(R.drawable.redtextview);
+                    if (rda.getText().equals(currentQ.getANSWER()))
+                        rda.setBackgroundResource(R.drawable.greentextview);
+                    else if (rdb.getText().equals(currentQ.getANSWER()))
+                        rdb.setBackgroundResource(R.drawable.greentextview);
+                    else if (rdc.getText().equals(currentQ.getANSWER()))
+                        rdc.setBackgroundResource(R.drawable.greentextview);
+                    else
+                        rdd.setBackgroundResource(R.drawable.greentextview);
+                }
                 nextQuestion=true;
                 clicked=true;
             }
