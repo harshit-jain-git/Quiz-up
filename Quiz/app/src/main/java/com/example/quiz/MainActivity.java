@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(MainActivity.this, "The other user has left the game", Toast.LENGTH_SHORT).show();
-                        Intent i1 = new Intent(MainActivity.this, MainScreen.class);
+                        Intent i1 = new Intent(MainActivity.this, mode.class);
                         startActivity(i1);
                     }
                 });
